@@ -7,7 +7,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from fastapi.staticfiles import StaticFiles
-from app.api.endpoints import test_router
+from app.api.endpoints import test_router, gpt
+from app.api.endpoints import city
 
 app = FastAPI()
 
@@ -32,6 +33,8 @@ async def read_root():
     return {"message": "Welcome to FastAPI!"}
 
 app.include_router(test_router.router, prefix="/test")
+app.include_router(gpt.router, prefix="/gpt")
+app.include_router(city.router, prefix="/city")
 
 if __name__ == "__main__":
     import uvicorn
